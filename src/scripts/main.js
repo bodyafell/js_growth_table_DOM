@@ -9,7 +9,8 @@ const removeColumnBtn = document.querySelector('.remove-column');
 const removeRowBtn = document.querySelector('.remove-row');
 
 function checkTableSize() {
-  if (table.rows[0].cells.length <= 2) {
+  const cols = table.rows[0] ? table.rows[0].cells.length : 0;
+  if (cols <= 2) {
     removeColumnBtn.disabled = true;
   } else {
     removeColumnBtn.disabled = false;
@@ -21,7 +22,7 @@ function checkTableSize() {
     removeRowBtn.disabled = false;
   }
 
-  if (table.rows[0].cells.length >= 10) {
+  if (cols >= 10) {
     addColumnBtn.disabled = true;
   } else {
     addColumnBtn.disabled = false;
@@ -37,7 +38,8 @@ function checkTableSize() {
 checkTableSize();
 
 addColumnBtn.addEventListener('click', () => {
-  if (table.rows[0].cells.length < 10) {
+  const cols = table.rows[0] ? table.rows[0].cells.length : 0;
+  if (cols < 10) {
     const trows = table.rows;
 
     for (let i = 0; i < trows.length; i++) {
@@ -61,7 +63,8 @@ addRowBtn.addEventListener('click', () => {
 });
 
 removeColumnBtn.addEventListener('click', () => {
-  if (table.rows[0].cells.length > 2) {
+  const cols = table.rows[0] ? table.rows[0].cells.length : 0;
+  if (cols > 2) {
     const trows = table.rows;
 
     for (let i = 0; i < trows.length; i++) {
