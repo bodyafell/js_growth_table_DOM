@@ -8,6 +8,34 @@ const addRowBtn = document.querySelector('.append-row');
 const removeColumnBtn = document.querySelector('.remove-column');
 const removeRowBtn = document.querySelector('.remove-row');
 
+function checkTableSize() {
+  if (table.rows[0].cells.length <= 2) {
+    removeColumnBtn.disabled = true;
+  } else {
+    removeColumnBtn.disabled = false;
+  }
+
+  if (table.rows.length <= 2) {
+    removeRowBtn.disabled = true;
+  } else {
+    removeRowBtn.disabled = false;
+  }
+
+  if (table.rows[0].cells.length >= 10) {
+    addColumnBtn.disabled = true;
+  } else {
+    addColumnBtn.disabled = false;
+  }
+
+  if (table.rows.length >= 10) {
+    addRowBtn.disabled = true;
+  } else {
+    addRowBtn.disabled = false;
+  }
+}
+
+checkTableSize();
+
 addColumnBtn.addEventListener('click', () => {
   if (table.rows[0].cells.length < 10) {
     const trows = table.rows;
@@ -17,13 +45,7 @@ addColumnBtn.addEventListener('click', () => {
     }
   }
 
-  if (table.rows[0].cells.length === 10) {
-    addColumnBtn.disabled = true;
-  }
-
-  if (table.rows[0].cells.length > 2) {
-    removeColumnBtn.disabled = false;
-  }
+  checkTableSize();
 });
 
 addRowBtn.addEventListener('click', () => {
@@ -35,13 +57,7 @@ addRowBtn.addEventListener('click', () => {
     }
   }
 
-  if (table.rows.length === 10) {
-    addRowBtn.disabled = true;
-  }
-
-  if (table.rows.length > 2) {
-    removeRowBtn.disabled = false;
-  }
+  checkTableSize();
 });
 
 removeColumnBtn.addEventListener('click', () => {
@@ -53,13 +69,7 @@ removeColumnBtn.addEventListener('click', () => {
     }
   }
 
-  if (table.rows[0].cells.length === 2) {
-    removeColumnBtn.disabled = true;
-  }
-
-  if (table.rows[0].cells.length < 10) {
-    addColumnBtn.disabled = false;
-  }
+  checkTableSize();
 });
 
 removeRowBtn.addEventListener('click', () => {
@@ -67,11 +77,5 @@ removeRowBtn.addEventListener('click', () => {
     tBody.deleteRow(tBody.rows.length - 1);
   }
 
-  if (table.rows.length === 2) {
-    removeRowBtn.disabled = true;
-  }
-
-  if (table.rows.length < 10) {
-    addRowBtn.disabled = false;
-  }
+  checkTableSize();
 });
